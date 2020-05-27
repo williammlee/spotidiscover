@@ -1,0 +1,27 @@
+try:
+  from googlesearch import search
+except ImportError:
+  print("No module named 'google' found")
+
+query = input("Lyrics: ")
+
+def ten_urls(lyrics):
+  results = []
+
+  # now searching
+  for url in search(lyrics, tld="com", num=10, stop=10, pause=2):
+    results.append(url)
+    
+  return results
+
+
+def search_web(urls):
+# look for "genius" in results
+  for link in urls:
+    if "genius" in link:
+      return link
+    
+  return None
+      
+print(search_web(ten_urls(query)))
+print("------Done Searching------")
