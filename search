@@ -2,6 +2,10 @@ try:
   from googlesearch import search
 except ImportError:
   print("No module named 'google' found")
+  
+import requests
+from bs4 import BeautifulSoup
+
 
 query = input("Lyrics: ")
 
@@ -22,6 +26,13 @@ def search_web(urls):
       return link
     
   return None
-      
-print(search_web(ten_urls(query)))
+
+def find_title(url):
+  page = requests.get(url)
+  soup = BeautifulSoup(page.content, 'html.parser')
+  title = soup.select('h1.header_with_cover_art-primary_info-title')[0].text.strip()
+  return title
+
+song_title = find_title(search_web(ten_urls(query)))
+print(song_title)
 print("------Done Searching------")
