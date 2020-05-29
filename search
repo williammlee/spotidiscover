@@ -6,9 +6,6 @@ except ImportError:
 import requests
 from bs4 import BeautifulSoup
 
-
-query = input("Lyrics: ")
-
 def ten_urls(lyrics):
   results = []
 
@@ -45,12 +42,16 @@ def find_album(soup):
   album = soup.select('span.metadata_unit-info')[1].text.strip()
   return album
 
-#main
-soup = create_soup(search_web(ten_urls(query)))
-song_title = find_title(soup)
-song_artist = find_artist(soup)
-song_album = find_album(soup)
-print(song_title)
-print(song_artist)
-print(song_album)
-print("------Done Searching------")
+def main():
+  query = input("Lyrics: ")
+  soup = create_soup(search_web(ten_urls(query)))
+  song_title = find_title(soup)
+  song_artist = find_artist(soup)
+  song_album = find_album(soup)
+  print(song_title)
+  print(song_artist)
+  print(song_album)
+  print("------Done Searching------")
+
+if  __name__ == '__main__':
+  main()
