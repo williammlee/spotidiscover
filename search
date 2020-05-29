@@ -27,12 +27,30 @@ def search_web(urls):
     
   return None
 
-def find_title(url):
+def create_soup(url):
   page = requests.get(url)
-  soup = BeautifulSoup(page.content, 'html.parser')
+  return BeautifulSoup(page.content, 'html.parser')
+  
+
+def find_title(soup):
   title = soup.select('h1.header_with_cover_art-primary_info-title')[0].text.strip()
   return title
 
-song_title = find_title(search_web(ten_urls(query)))
+
+def find_artist(soup):
+  artist = soup.select('a.header_with_cover_art-primary_info-primary_artist')[0].text.strip()
+  return artist
+
+def find_album(soup):
+  album = soup.select('span.metadata_unit-info')[1].text.strip()
+  return album
+
+#main
+soup = create_soup(search_web(ten_urls(query)))
+song_title = find_title(soup)
+song_artist = find_artist(soup)
+song_album = find_album(soup)
 print(song_title)
+print(song_artist)
+print(song_album)
 print("------Done Searching------")
