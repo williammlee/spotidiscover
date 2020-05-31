@@ -3,9 +3,6 @@ import base64
 import datetime
 from urllib.parse import urlencode
 
-client_id = "480b5435dcf240fdbfb3fa533d5ab00d"
-client_secret = "cb1105402e3142b5a52c38f6d44284e8"
-
 
 class SpotifyAPI(object):
     access_token = None
@@ -87,11 +84,10 @@ class SpotifyAPI(object):
     def get_artists(self, _id):
         return self.get_resource(_id, resource_type="artists")
 
-    def search(self, query, search_type='artist'):
+    def base_search(self, query_params):
         headers = self.get_resource_header()
         endpoint = "https://api.spotify.com/v1/search"
-        data = urlencode({"q": query, "type": search_type.lower()})
-        lookup_url = f"{endpoint}?{data}"
+        lookup_url = f"{endpoint}?{query_params}"
         print(lookup_url)
         r = requests.get(lookup_url, headers=headers)
         print(r.status_code)
@@ -99,6 +95,10 @@ class SpotifyAPI(object):
             return {}
         return r.json()
 
-
-spotify = SpotifyAPI(client_id, client_secret)
-print(spotify.search("Time", search_type="Track"))
+    def search(self, query=None, search_type='artist'):
+        if query == None:
+            raise Exception("A query is required")
+        if isinstance(query, dict):
+            query = " ".join([f"{k}:{v}" for k, v in query.items()])
+        query_params = urlencode({"q": query, "type": search_type.lower()})
+        return self.base_search(query_params)
