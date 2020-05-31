@@ -7,9 +7,6 @@ import sys
 import spotipy.util as util
 from spotify_api import SpotifyAPI
 
-SPOTIPY_CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
-SPOTIPY_CLIENT_SECRET = "cb1105402e3142b5a52c38f6d44284e8"
-
 
 def ten_urls(lyrics):
     results = []
