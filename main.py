@@ -1,5 +1,5 @@
 from spotify_api import *
-from search import *
+from genius_search import *
 
 
 CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
@@ -11,9 +11,10 @@ def main():
     # Begin HTML Scraping
 
     ask_query = input("Lyrics: ")
-    soup = create_soup(search_web(ten_urls(ask_query)))
-    song_title = find_title(soup)
-    song_artist = find_artist(soup)
+
+    genius = GeniusSearch(ask_query)
+    song_title = genius.find_title()
+    song_artist = genius.find_artist()
     print("The title is: " + song_title)
     print("The artist is: " + song_artist)
     print("------Done Scraping------")
@@ -27,7 +28,7 @@ def main():
         "items")[0].get("external_urls").get("spotify")
     play_track_preview = json_query.get("tracks").get(
         "items")[0].get("preview_url")
-
+    print(get_track_url)
     return get_track_url
 
 
