@@ -1,5 +1,6 @@
 from spotify_api import *
 from genius_search import *
+import webbrowser
 
 
 CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
@@ -11,6 +12,8 @@ def main():
     # Begin HTML Scraping
 
     ask_query = input("Lyrics: ")
+
+    # Begin Genius Search
 
     genius = GeniusSearch(ask_query)
     song_title = genius.find_title()
@@ -28,8 +31,11 @@ def main():
         "items")[0].get("external_urls").get("spotify")
     play_track_preview = json_query.get("tracks").get(
         "items")[0].get("preview_url")
-    print(get_track_url)
-    return get_track_url
+    webbrowser.open(get_track_url)
+    if play_track_preview is None:
+        raise Exception("Track Preview not Available")
+    else:
+        webbrowser.open(play_track_preview)
 
 
 if __name__ == '__main__':
