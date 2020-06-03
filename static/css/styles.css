@@ -1,0 +1,19 @@
+body {
+  background-image: url(/static/images/background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 68%;
+  background-size: cover;
+}
+
+.search_text {
+  color: rgb(0, 0, 0);
+  font-size: 120px;
+  font-weight: 700;
+  font-family: "Brush Script MT";
+  font-variant: small-caps;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
