@@ -17,3 +17,14 @@ body {
   width: 100%;
   text-align: center;
 }
+
+input[type=text]{
+  width: 75%;
+  padding: 12px 20px;
+  color: black;
+  font-weight: 600;
+  border: none;
+  border-bottom: white;
+  border-bottom-width: 2px;
+  opacity: 0.2;
+}
