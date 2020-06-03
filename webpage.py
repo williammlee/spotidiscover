@@ -1,7 +1,4 @@
 from flask import Flask, render_template, request, redirect
-from spotify_api import *
-from genius_search import *
-import webbrowser
 import main
 
 CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
@@ -26,3 +23,9 @@ if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(debug=True)
+
+# Todo
+# if there is an exception with having no audio preview
+# if the song is not what they anticipated
+# redirect them to a custom page with a nicely formatted album cover, and track info
+    # look at the instagram thing as an example.
