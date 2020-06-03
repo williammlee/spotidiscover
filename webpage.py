@@ -1,15 +1,23 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
+from spotify_api import *
+from genius_search import *
+import webbrowser
+import main
 
+CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
+CLIENT_SECRET = "cb1105402e3142b5a52c38f6d44284e8"
 app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home_page():
-    return render_template("index.html", title="chicagodiner", artist="kota")
+    if request.method == 'POST':
+        ask_query = request.form['input']
+        main.main(ask_query)
+    return render_template("index.html")
 
 
-@app.route("/return_page")
+@app.route("/return_page", methods=['GET', 'POST'])
 def return_page():
     return render_template("return.html", title="chicagodiner", artist="kota")
 

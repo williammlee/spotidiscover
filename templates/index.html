@@ -8,8 +8,9 @@
 
 <body>
   <div class=search_text> Search Lyrics <br> <br> <br>
-    <form>
-      <input type="text" />
+    <form action="" method="POST">
+      <input type="text" name="input" placeholder="Search.." value={{request.form.input}}>
+      <button type="submit">Submit</button>
     </form>
   </div>
 </body>

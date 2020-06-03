@@ -1,21 +1,22 @@
 from spotify_api import *
 from genius_search import *
 import webbrowser
+import webpage
 
 
 CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
 CLIENT_SECRET = "cb1105402e3142b5a52c38f6d44284e8"
 
 
-def main():
+def main(q):
 
     # Begin HTML Scraping
 
-    ask_query = input("Lyrics: ")
+    ask_query = webpage.request.form['input']
 
     # Begin Genius Search
 
-    genius = GeniusSearch(ask_query)
+    genius = GeniusSearch(q)
     song_title = genius.find_title()
     song_artist = genius.find_artist()
     print("The title is: " + song_title)
@@ -36,7 +37,3 @@ def main():
         raise Exception("Track Preview not Available")
     else:
         webbrowser.open(play_track_preview)
-
-
-if __name__ == '__main__':
-    main()
