@@ -6,27 +6,27 @@ CLIENT_SECRET = "cb1105402e3142b5a52c38f6d44284e8"
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home_page():
     return render_template("index.html")
 
 
-@ app.route("/loading")
+@app.route("/loading", methods=['GET', 'POST'])
 def loading():
-    return render_template("loading.html", form_data=request.form['form_data'])
+    return render_template("loading.html", form_data=request.form['input'])
 
 
-@ app.route("/return_page", methods=['GET', 'POST'])
+@app.route("/return_page", methods=['GET', 'POST'])
 def return_page():
-    if request.method == 'GET':
+    if request.method == 'POST':
         render_template("return.html")
         ask_query = request.form['input']
         query = main.main(ask_query)
         main.track(query)
-        try:
-            main.play(query)
-        except:
-            redirect("index.html")
+        # try:
+        #   main.play(query)
+        # except:
+        #    redirect("index.html")
     return make_response('POST Request Successful', 200)
 
 
