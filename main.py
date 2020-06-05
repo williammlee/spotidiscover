@@ -28,12 +28,19 @@ def main(q):
     query = {"track": song_title, "artist": song_artist}
     spotify = SpotifyAPI(CLIENT_ID, CLIENT_SECRET)
     json_query = spotify.search(query, search_type="Track")
+    return json_query
+
+
+def track(json_query):
     get_track_url = json_query.get("tracks").get(
         "items")[0].get("external_urls").get("spotify")
+    return webbrowser.open(get_track_url)
+
+
+def play(json_query):
     play_track_preview = json_query.get("tracks").get(
         "items")[0].get("preview_url")
-    webbrowser.open(get_track_url)
     if play_track_preview is None:
-        raise Exception("Track Preview not Available")
+        raise Exception("Track Preview Not Found")
     else:
         webbrowser.open(play_track_preview)

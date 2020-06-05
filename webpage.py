@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import main
 
 CLIENT_ID = "480b5435dcf240fdbfb3fa533d5ab00d"
@@ -6,17 +6,28 @@ CLIENT_SECRET = "cb1105402e3142b5a52c38f6d44284e8"
 app = Flask(__name__)
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def home_page():
-    if request.method == 'POST':
-        ask_query = request.form['input']
-        main.main(ask_query)
     return render_template("index.html")
 
 
-@app.route("/return_page", methods=['GET', 'POST'])
+@ app.route("/loading")
+def loading():
+    return render_template("loading.html", form_data=request.form['form_data'])
+
+
+@ app.route("/return_page", methods=['GET', 'POST'])
 def return_page():
-    return render_template("return.html", title="chicagodiner", artist="kota")
+    if request.method == 'GET':
+        render_template("return.html")
+        ask_query = request.form['input']
+        query = main.main(ask_query)
+        main.track(query)
+        try:
+            main.play(query)
+        except:
+            redirect("index.html")
+    return make_response('POST Request Successful', 200)
 
 
 if __name__ == "__main__":

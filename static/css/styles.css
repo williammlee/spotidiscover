@@ -6,7 +6,7 @@ body {
   background-size: cover;
 }
 
-.search_text {
+.content {
   color: rgb(0, 0, 0);
   font-size: 120px;
   font-weight: 700;
@@ -28,3 +28,19 @@ input[type=text]{
   border-bottom-width: 2px;
   opacity: 0.2;
 }
+
+div#content
+{
+  display:none;
+}
+
+div#loading {
+  top: 200 px;
+  margin: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 500px;
+  height: 500px;
+  background: url(/static/images/loading-gif.gif) no-repeat;
+  cursor: wait;
+  }

@@ -7,10 +7,11 @@
 </head>
 
 <body>
-  <div class=search_text> Search Lyrics <br> <br> <br>
-    <form action="" method="POST">
+  <div class=content> Search Lyrics
+    <br> <br> <br>
+    <form action="{{ url_for('loading') }}" method="POST">
       <input type="text" name="input" placeholder="Search.." value={{request.form.input}}>
-      <button type="submit">Submit</button>
+      <button type="submit" name="anything_submit" value="Submit">
     </form>
   </div>
 </body>
