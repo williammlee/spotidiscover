@@ -13,7 +13,7 @@ class GeniusSearch(Search):
         # look for "genius" in results
         results = []
         genius_query = "site:genius.com " + self.query
-        for url in gsearch(genius_query, tld="com", num=2, stop=2, pause=1):
+        for url in gsearch(genius_query):
             results.append(url)
         for link in results:
             if "genius" in link:
